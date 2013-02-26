@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Teste</title>
+	<script type="text/javascript" src="libs/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript"
+	src="libs/swfobject.js"></script>
+	<script type="text/javascript" src="libs/AudioRecorder.js"></script>
+</head>
+<body>
+	<button id="start">Start Capture</button>
+	<button id="play">Preview</button>
+	<button id="save">Save to MP3</button>
+	<div id="flash"></div>
+
+	<script type="text/javascript">
+	   var base_url = window.location.toString().replace(/example\.html.*/, '');
+		var rec = new AudioRecorder(base_url + '/libs/', base_url + 'writeAudio.php', $('body')[0], 'writeAudio.php?save=1');
+
+		$('#start').click(function startClick() {
+			rec.start();
+			$(this).unbind().click(function() {
+				rec.stop();
+				$(this).unbind().click(startClick);
+			});
+		});
+		$('#play').click(function() {
+			rec.play();
+		});
+
+		$('#save').click(function() {
+			rec.save();
+		});
+	</script>
+</body>
+</html>
