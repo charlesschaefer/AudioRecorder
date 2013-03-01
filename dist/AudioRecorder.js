@@ -19,12 +19,10 @@ function AudioRecorder(script_base, url, el, save_url) {
 	// adds the flash container
 	$(el).append('<div id="flash"></div>');
 
-	var script = document.createElement('script');
-	script.onload = function() {
+	$.getScript(script_base + '/wami/recorder.js', function() {
+		console.log('vamos no wami');
 		Wami.setup({id: 'flash', swfUrl: script_base + "/wami/Wami.swf"});
-	};
-	script.src = script_base + '/wami/recorder.js';
-	$('body').append(script);
+	});
 }
 
 /**
