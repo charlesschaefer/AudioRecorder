@@ -19,8 +19,11 @@ function AudioRecorder(script_base, url, el, save_url) {
 	// adds the flash container
 	$(el).append('<div id="flash"></div>');
 
-	$.getScript(script_base + '/wami/recorder.js', function() {
-		console.log('vamos no wami');
+	$.ajax({
+		url: script_base + '/wami/recorder.js',
+		dataType: 'script',
+		cache: true
+	}).done(function() {
 		Wami.setup({id: 'flash', swfUrl: script_base + "/wami/Wami.swf"});
 	});
 }
@@ -56,8 +59,8 @@ AudioRecorder.prototype.pause = function() {
 AudioRecorder.prototype.save = function(fn) {
 	$.ajax({
 		url: this.save_url, 
-		complete: function() {
-			fn && fn();
+		complete: function(result) {
+			fn && fn(result);
 		}
 	});
 };
