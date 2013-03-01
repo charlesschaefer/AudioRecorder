@@ -20,12 +20,11 @@ function AudioRecorder(script_base, url, el, save_url) {
 	$(el).append('<div id="flash"></div>');
 
 	var script = document.createElement('script');
-	$('body').append(script);
-
 	script.onload = function() {
 		Wami.setup({id: 'flash', swfUrl: script_base + "/wami/Wami.swf"});
 	};
 	script.src = script_base + '/wami/recorder.js';
+	$('body').append(script);
 }
 
 /**
