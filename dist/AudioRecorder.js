@@ -32,8 +32,13 @@ function AudioRecorder(script_base, url, el, save_url, onReadyCb) {
 /**
  * Start to capture de audio.
  */
-AudioRecorder.prototype.start = function() {
-	Wami.startRecording(this.url);
+AudioRecorder.prototype.start = function(startfn, finishedfn, failedfn) {
+	Wami.startRecording(
+		this.url,
+		Wami.nameCallback(startfn),
+		Wami.nameCallback(finishedfn),
+		Wami.nameCallback(failedfn)
+	);
 };
 /**
  * Stop the capture of the audio.
@@ -45,8 +50,13 @@ AudioRecorder.prototype.stop = function() {
 /**
  * Play the audio sent to the server. Server must serve the Wav file
  */
-AudioRecorder.prototype.play = function() {
-	Wami.startPlaying(this.url);
+AudioRecorder.prototype.play = function(startfn, finishedfn, failedfn) {
+	Wami.startPlaying(
+		this.url,
+		Wami.nameCallback(startfn),
+		Wami.nameCallback(finishedfn),
+		Wami.nameCallback(failedfn)
+	);
 };
 /**
  * Stop the audio preview
